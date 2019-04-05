@@ -12,6 +12,8 @@ public class EventMenu {
     
     private Semaphore concurrentObject = new Semaphore(Integer.MAX_VALUE);
     
+    private Logger logger = Logger.getLogger(EventStoreImpl.class.getName());
+    
     private int searchObject(final long timestamp) {
         if(events.isEmpty()) {
             return 0;
@@ -41,7 +43,7 @@ public class EventMenu {
         try {
             concurrentObject.acquire(Integer.MAX_VALUE);
         } catch (InterruptedException ex) {
-            Logger.getLogger(EventStoreImpl.class.getName()).log(Level.SEVERE, null, ex);
+        	logger.log(Level.SEVERE, null, ex);
         }
         
         events.add(searchObject(event.timestamp()), event);
@@ -54,7 +56,7 @@ public class EventMenu {
         try {
             concurrentObject.acquire(Integer.MAX_VALUE);
         } catch (InterruptedException ex) {
-            Logger.getLogger(EventStoreImpl.class.getName()).log(Level.SEVERE, null, ex);
+        	logger.log(Level.SEVERE, null, ex);
         }
         events.remove(event);
         concurrentObject.release(Integer.MAX_VALUE);
@@ -66,7 +68,7 @@ public class EventMenu {
         try {
             concurrentObject.acquire(1);
         } catch (InterruptedException ex) {
-            Logger.getLogger(EventStoreImpl.class.getName()).log(Level.SEVERE, null, ex);
+        	logger.log(Level.SEVERE, null, ex);
         }
         
         int indexBegin = searchObject(startTime);

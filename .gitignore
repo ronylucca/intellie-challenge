@@ -11,6 +11,10 @@
 *.hprof
 /target
 /*/target
+
+
+
+*.project
 .settings
 /trace.db
 .jhw-cache

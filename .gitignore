@@ -11,6 +11,7 @@
 *.hprof
 /target
 /*/target
+.settings
 /trace.db
 .jhw-cache
 dependency-reduced-pom.xml

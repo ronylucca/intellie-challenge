@@ -96,7 +96,7 @@ public class EventCollection {
     }
     
     
-    //Method responsible for 
+    //Method responsible for search event
     private int searchObject(final long timestamp) {
         if(events.isEmpty()) {
             return 0;
@@ -125,7 +125,8 @@ public class EventCollection {
     /*
      * just following some clean code slicing caller method. 
      * method responsible for set the initial pointer(index) in List
-     * during tests, this refact wasnt wellcome. Then I realized the issue regarding the state of all vars inside.
+     * Update: during tests, this way I tried wasn't well. 
+     * Then I realized the issue was regarding the memory state of all vars inside.
      */
     @Deprecated
     private void calibrateInitialIndex(boolean found, int initialIndex, long startTime) {
@@ -142,6 +143,8 @@ public class EventCollection {
     /*
      * just following some clean code slicing caller method as before
      * method responsible for set the final pointer(index) in List
+     * Update: during tests, this way I tried wasn't well. 
+     * Then I realized the issue was regarding the memory state of all vars inside.
      */
     @Deprecated
     private void calibrateFinalIndex(boolean found, int finalIndex, long startTime, long endTime) {

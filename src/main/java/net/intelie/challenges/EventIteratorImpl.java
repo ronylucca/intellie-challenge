@@ -8,20 +8,14 @@ public class EventIteratorImpl implements EventIterator {
     private final EventStoreImpl eventStore;
     private int pointer = -1;
     
-    EventIteratorImpl(EventStoreImpl eventStore, List<Event> events) {
+    
+    //Constructor responsible to inject EventStoreImpl and Events
+    public EventIteratorImpl(EventStoreImpl eventStore, List<Event> events) {
         this.eventStore = eventStore;
         this.events = events;
     }
     
-    
-	@Override
-	public void close() throws Exception {
-		// TODO Auto-generated method stub
-		eventStore.closeEventIterator(this);
-
-	}
-
-	@Override
+    @Override
 	public boolean moveNext() {
 		// TODO Auto-generated method stub
 		pointer++;
@@ -30,8 +24,8 @@ public class EventIteratorImpl implements EventIterator {
         }
         return true;
 	}
-
-	@Override
+    
+    @Override
 	public Event current() {
 		// TODO Auto-generated method stub
 		if(pointer == -1 || pointer >= events.size()) {
@@ -51,5 +45,17 @@ public class EventIteratorImpl implements EventIterator {
         events.remove(pointer);
 		
 	}
+    
+	//close() method from Autoclosable interface super class
+	@Override
+	public void close() throws Exception {
+		// TODO Auto-generated method stub
+		eventStore.closeEventIterator(this);
+
+	}
+
+	
+
+	
 
 }

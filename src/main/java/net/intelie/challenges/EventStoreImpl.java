@@ -79,20 +79,21 @@ public class EventStoreImpl implements EventStore {
 		// TODO Auto-generated method stub
 		try {
 			//Thread safe begins
-
 			concurrentObject.acquire(PERMIT_ONE);
 
-			//Thread safe ends
+			
 		}catch(InterruptedException e) {
 			logger.log(Level.SEVERE, null, e);
 		}
 		EventCollection eventMenu = getObjectListFilteredByType(type);
 		concurrentObject.release(PERMIT_ONE);
-		// end of thread safe to get the Event Lists
+		// Thread safe ends
+		
 		EventIteratorImpl eventIterator;
 		if (eventMenu == null) {
 			eventIterator = new EventIteratorImpl(this, new LinkedList());
-			// thread safe to edit the list of iterators
+			// Thread safe for iterators
+			
 			try {
 				concurrentEventIterators.acquire();
 			} catch (InterruptedException e) {
@@ -100,7 +101,8 @@ public class EventStoreImpl implements EventStore {
 			}
 			eventIterators.add(eventIterator);
 			concurrentEventIterators.release();
-			// end of thread safe to edit the list of iterators
+			// Thread safe ends for iterators
+			
 			return eventIterator;
 		}
 
@@ -126,7 +128,8 @@ public class EventStoreImpl implements EventStore {
 	 * Method used by encapsulated calls from EventCollection
 	 */
 	protected void closeEventIterator(EventIterator eventIerator) {
-		// TODO Auto-generated method stub   
+		// TODO Auto-generated method stub 
+		
 		// Thread safe begins
 		try {
 			concurrentEventIterators.acquire();
@@ -151,8 +154,8 @@ public class EventStoreImpl implements EventStore {
 		}
 		EventCollection eventList = getObjectListFilteredByType(event.type());
 		concurrentObject.release(PERMIT_MAX);
-
 		//Thread safe ends
+		
 		if (eventList != null) {
 			eventList.removeItem(event);
 		}

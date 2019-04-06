@@ -60,10 +60,9 @@ public class EventStoreImpl implements EventStore {
 		// TODO Auto-generated method stub
 		try {
 			//Thread safe begins
-
 			concurrentObject.acquire(PERMIT_MAX);
-			
 			//Thread safe ends
+			
 		}catch (InterruptedException e) {
 			logger.log(Level.SEVERE, null, e);
 		}
@@ -117,7 +116,6 @@ public class EventStoreImpl implements EventStore {
 		}
 		eventIterators.add(eventIterator);
 		concurrentEventIterators.release();
-
 		// Thread safe ends for iterators
 
 		return eventIterator;

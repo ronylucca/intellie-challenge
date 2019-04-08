@@ -66,7 +66,7 @@ public class EventCollection {
         int finalIndex = searchObject(endTime-1);
         boolean found = false;
         
-        //calibrateInitialIndex(found, initialIndex, startTime);
+        //calibrateInitialIndex
         while(!found){
             if(initialIndex > 0 && events.get(initialIndex - 1).timestamp() == startTime) {
                 initialIndex--;
@@ -76,7 +76,7 @@ public class EventCollection {
         }
         
         
-        //calibrateFinalIndex(found, finalIndex, startTime, endTime);
+        //calibrateFinalIndex
         found = false;
         int length = events.size();
         while(!found){

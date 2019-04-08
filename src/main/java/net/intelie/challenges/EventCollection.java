@@ -154,10 +154,6 @@ public class EventCollection {
                 found = true;
             }
         }
-    }
-    
-    
-    
-    
+    } 
     
 }

@@ -22,7 +22,6 @@ public class EventCollection {
     
     //I would implement a pojo to represent the machine state and some crazy stuff, then I prefer use some utils package candies. 
     private Semaphore concurrentObject = new Semaphore(Integer.MAX_VALUE);
-    
     private Logger logger = Logger.getLogger(EventStoreImpl.class.getName());
     
     private static int PERMIT_ONE = 1;

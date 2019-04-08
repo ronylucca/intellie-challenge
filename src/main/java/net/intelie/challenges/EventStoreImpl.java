@@ -24,7 +24,8 @@ public class EventStoreImpl implements EventStore {
 	Semaphore concurrentObject = new Semaphore(PERMIT_MAX);
 	Semaphore concurrentEventIterators = new Semaphore(PERMIT_ONE);
 
-    
+	
+    //Get Collection from Type
     private EventCollection getObjectListFilteredByType(final String type) {
     	return menu.get(type);
 
@@ -150,12 +151,12 @@ public class EventStoreImpl implements EventStore {
 		} catch (InterruptedException e) {
 			logger.log(Level.SEVERE, null, e);
 		}
-		EventCollection eventList = getObjectListFilteredByType(event.type());
+		EventCollection eventColection = getObjectListFilteredByType(event.type());
 		concurrentObject.release(PERMIT_MAX);
 		//Thread safe ends
 		
-		if (eventList != null) {
-			eventList.removeItem(event);
+		if (eventColection != null) {
+			eventColection.removeItem(event);
 		}
 	}
 
